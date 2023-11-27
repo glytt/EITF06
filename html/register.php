@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Hash the password 
 	$hashed_password = password_hash($password, PASSWORD_BCRYPT); 
 	$host = "localhost"; 
-	$dbname = "shp"; 
+	$dbname = "test"; 
 	$username_db = "root"; 
 	$password_db = ""; 
 	try { 

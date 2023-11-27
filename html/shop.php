@@ -32,10 +32,10 @@ if (isset($_POST["add_to_cart"])) {
 	</head> 
 	<body> 
 		<header> 
-			<h1>Welcome to <?php 
+			<h1>Welcome <?php 
 			$user = $_SESSION["user"]; 
 			echo $user["name"]; 
-			?> a Totally Legal Pharmacy</h1> 
+			?> to a Totally Legal Pharmacy</h1> 
 		</header> 
 		<nav> 
 			<ul> 

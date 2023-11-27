@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	// Connect to the database 
 	$host = "localhost"; 
-	$dbname = "shp"; 
+	$dbname = "test"; 
 	$username_db = "root"; 
 	$password_db = ""; 
 
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 				echo '<script type="text/javascript"> 
 	window.onload = function () { 
-		alert("Welcome to GFG shopping website"); 
+		alert("Successful login. Welcome to GFG shopping website"); 
 		window.location.href = "shop.php"; 
 	}; 
 </script> 

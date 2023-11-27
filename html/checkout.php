@@ -9,8 +9,6 @@
  
 </head> 
 
-
-
 <body> 
 	<header> 
 		<nav> 
@@ -54,10 +52,6 @@
 				id="city"
 				name="city" required> 
 
-			<label for="state">State:</label> 
-			<input type="text"
-				id="state"
-				name="state" required> 
 
 			<label for="zip">Zip Code:</label> 
 			<input type="text"
