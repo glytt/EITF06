@@ -15,9 +15,7 @@
 	<header> 
 		<nav> 
 			<ul> 
-				<li> 
-					<a href="shop.php">Home</a> 
-				</li> 
+			
 				<li> 
 					<a href="shop.php">Shop</a> 
 				</li> 
@@ -25,8 +23,7 @@
 					<a href="cart.php">Cart</a> 
 				</li> 
 				<li> 
-					<a href= 
-"mailto:mae@dektis.se">Contact</a> 
+					<a href= "mailto:mae@dektis.se">Contact</a> 
 				
 					</li> 
 			</ul> 

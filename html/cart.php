@@ -33,14 +33,14 @@
 					<th>Total </th> 
 				</tr> 
 				<?php 
-				$servername = "localhost"; 
+				$hostname = "localhost"; 
 				$username = "root"; 
 				$password = ""; 
-				$dbname = "drugstoreDb"; 
+				$database = "test"; 
 
 				// Create connection 
 				$conn = 
-					new mysqli($servername, $username, $password, $dbname); 
+					new mysqli($hostname, $username, $password, $database); 
 
 				// Check connection 
 				if ($conn->connect_error) { 
