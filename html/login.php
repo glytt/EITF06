@@ -31,19 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$_SESSION["user"] = $user; 
 
 				echo '<script type="text/javascript"> 
-	window.onload = function () { 
-		alert("Successful login. Welcome to GFG shopping website"); 
-		window.location.href = "shop.php"; 
-	}; 
-</script> 
+						window.onload = function () { 
+							alert("Successful login. Welcome to GFG shopping website"); 
+							window.location.href = "shop.php"; 
+						}; 
+					</script> 
 '; 
-			} else { 
-				echo "<h2>Login Failed</h2>"; 
-				echo "Invalid email or password."; 
 			} 
-		} else { 
+		} else {
 			echo "<h2>Login Failed</h2>"; 
-			echo "User doesn't exist"; 
+			echo "Invalid username or password."; 
+			
 		} 
 	} catch (PDOException $e) { 
 		echo "Connection failed: " . $e->getMessage(); 
