@@ -83,10 +83,11 @@
 				}
 				?>
 			</table>
+
+			</form>
 			<form action="checkout.php" method="post">
-				<input type="submit"
-					value="Checkout"
-					class="button" />
+   			 <input type="hidden" name="total" value="<?php echo $total; ?>">
+   			 <input type="submit" value="Checkout" class="button" />
 			</form>
 		</section>
 	</main>

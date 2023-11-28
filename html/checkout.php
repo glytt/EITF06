@@ -10,6 +10,18 @@
 </head> 
 
 <body> 
+<script>
+    fetch('http://localhost:8080/getwalletaddress')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('walletAddress').innerText = data.address;
+        })
+        .catch(error => {
+            console.error('Error fetching wallet address:', error);
+            document.getElementById('walletAddress').innerText = 'Error fetching wallet address';
+        });
+</script>
+
 	<header> 
 		<nav> 
 			<ul> 
@@ -22,7 +34,6 @@
 				</li> 
 				<li> 
 					<a href= "mailto:mae@dektis.se">Contact</a> 
-				
 					</li> 
 			</ul> 
 		</nav> 
@@ -31,62 +42,23 @@
 	<section> 
 		<h1>Checkout</h1> 
 		<form action="thanks.php" method="post"> 
-			<h2>Billing Information</h2> 
-			<label for="name">Name:</label> 
+			<h4>Pay total to wallet address, then state the transaction ID below</h4> 
+
+			<?php 
+			$total = isset($_POST['total']) ? $_POST['total'] : 0;
+			echo "Total: <td>$total $</td>";
+			?>
+			<p>Wallet address: 1GFGFNv7DwEm2xyQF6vthFEQ19JE4rHtEc</p>
+			</p>
+			<label for="transID">Transaction ID:</label> 
 			<input type="text"
-				id="name"
-				name="name" required> 
+				id="transID"
+				name="transID"
+				pattern="[a-fA-F0-9]{64}"
+				title="Please enter a valid transaction ID (64 hex characters)"
+				required>
 
-			<label for="email">Email:</label> 
-			<input type="email"
-				id="email"
-				name="email" required> 
-
-			<label for="address">Address:</label> 
-			<input type="text"
-				id="address"
-				name="address" required> 
-
-			<label for="city">City:</label> 
-			<input type="text"
-				id="city"
-				name="city" required> 
-
-
-			<label for="zip">Zip Code:</label> 
-			<input type="text"
-				id="zip"
-				name="zip" required> 
-
-			<h2>Payment Information</h2> 
-			<label for="cardholder">Name on Card:</label> 
-			<input type="text" id="cardholder"
-				name="cardholder" required> 
-
-			<label for="cardnumber">Card Number:</label> 
-			<input type="text"
-				id="cardnumber"
-				name="cardnumber" required 
-				pattern="\d{4}-?\d{4}-?\d{4}-?\d{4}" required=> 
-
-
-			<label for="expmonth">Expiration Month:</label> 
-			<input type="text"
-				id="expmonth"
-				name="expmonth" required> 
-
-			<label for="expyear">Expiration Year:</label> 
-			<input type="text"
-				id="expyear"
-				name="expyear" required> 
-
-			<label for="cvv">CVV:</label> 
-			<input type="text"
-				id="cvv"
-				name="cvv" required> 
-
-			<input type="submit"
-				value="Place Order"> 
+			<input type="submit" value="Place Order"> 
 		</form> 
 	</section> 
 
