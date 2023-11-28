@@ -7,11 +7,28 @@
 		type="text/css"
 		href="css/index.css"> 
 </head> 
+<script> 
+	function isNotCommonPassword(password) {
+		var commonPasswords = ["password1234", "qwertyuiopas", "password12345", "111111111111", "1234567654321", "abc123456789", "passwordpassword", "asecurepassword", "thebestpassword", "qwerty123456", "qwertyqwerty", "abcdefg12345", "420blazeit", "dontactuallydodrugs", "tooschoolforcool","tjejerälskarminautismswag", "jagbegårskattebrott"];
+		return !commonPasswords.includes(password);
+	}
+
+	function validatePassword() {
+		var passwordInput = document.getElementById("password");
+		var password = passwordInput.value;
+
+		if (!isNotCommonPassword(password)) {
+			alert("Please choose a stronger password.");
+			return false;
+		}
+	}
+
+</script>
 
 <body> 
 	<div class="container"> 
 		<h1>Registration Page</h1> 
-		<form method="post" action="register.php"> 
+		<form method="post" action="register.php" onsubmit="return validatePassword();"> 
 			<label for="name"> 
 				Name: 
 			</label> 
@@ -31,10 +48,13 @@
 				id="email"
 				name="email" required> 
 
-			<label for="password">Password:</label> 
+			<label for="password">Ass2:</label> 
 			<input type="password"
 				id="password"
-				name="password" required> 
+				name="password" 
+				pattern=".{12,}"
+				title="Password must be at least 12 characters long" 
+				required> 
 
 			<input type="submit"
 				value="Register"> 
