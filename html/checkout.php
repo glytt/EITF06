@@ -10,17 +10,6 @@
 </head> 
 
 <body> 
-<script>
-    fetch('http://localhost:8080/getwalletaddress')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('walletAddress').innerText = data.address;
-        })
-        .catch(error => {
-            console.error('Error fetching wallet address:', error);
-            document.getElementById('walletAddress').innerText = 'Error fetching wallet address';
-        });
-</script>
 
 	<header> 
 		<nav> 
@@ -45,8 +34,12 @@
 			<h4>Pay total to wallet address, then state the transaction ID below</h4> 
 
 			<?php 
-			$total = isset($_POST['total']) ? $_POST['total'] : 0;
-			echo "Total: <td>$total $</td>";
+			session_start(); // Make sure to start the session
+
+			// Retrieve the total from the session
+			$total = isset($_SESSION['total']) ? $_SESSION['total'] : 0;
+			echo "Total price: $total $";
+
 			?>
 			<p>Wallet address: 1GFGFNv7DwEm2xyQF6vthFEQ19JE4rHtEc</p>
 			</p>
