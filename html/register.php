@@ -1,5 +1,8 @@
 <?php 
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+
 	$name = $_POST["name"]; 
 	$username = $_POST["username"]; 
 	$email = $_POST["email"]; 
@@ -28,14 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Username already exists. Please choose a different username.";
         } else {
 
-		
 		$stmt = $db->prepare( 
-		"INSERT INTO users (name,username,email, password) 
-			VALUES (:name, :username, :email,:password)"); 
+		"INSERT INTO users (name,username,email, password, loginattempts) 
+			VALUES (:name, :username, :email,:password, :loginattempts)"); 
 		$stmt->bindParam(":name", $name); 
 		$stmt->bindParam(":username", $username); 
 		$stmt->bindParam(":email", $email); 
 		$stmt->bindParam(":password", $hashed_password); 
+		$stmt->bindValue(":loginattempts", 0, PDO::PARAM_INT);
 		$stmt->execute(); 
 		echo "<h2>Registration Successful</h2>"; 
 		echo "Thank you for registering, " . $name . "!<br>"; 

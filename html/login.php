@@ -26,9 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$user = $stmt->fetch(PDO::FETCH_ASSOC); 
 
 		if ($user) { 
-			if (password_verify($password, $user["password"]) && $_SESSION["login_counter"] < 5 ) { 
+			if (password_verify($password, $user["password"]) && $user["loginattempts"] < 5 ) { 
 				$_SESSION["user"] = $user; 
-				$_SESSION["login_counter"] = 0; 
+				$update_stmt = $db->prepare("UPDATE users SET loginattempts = 0 WHERE username = :username");
+                $update_stmt->bindParam(":username", $username);
+                $update_stmt->execute();
 
 				echo '<script type="text/javascript"> 
 						window.onload = function () { 
@@ -40,13 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			} else {
 				echo "<h2>Login Failed</h2>"; 
 				echo "Invalid username or password."; 
-				$_SESSION["login_counter"] += 1;
+				echo $user["loginattempts"];
+				$update_stmt = $db->prepare("UPDATE users SET loginattempts = loginattempts + 1 WHERE username = :username");
+                $update_stmt->bindParam(":username", $username);
+                $update_stmt->execute();
 			}
 		} else {
-			echo $_SESSION["login_counter"];
+			 
 			echo "<h2>Login Failed</h2>"; 
 			echo "Invalid username or password."; 
-			$_SESSION["login_counter"] += 1;
+			 
 			 
 			
 			
