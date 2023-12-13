@@ -5,24 +5,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = $_POST["email"]; 
 	$password = $_POST["password"]; 
 	
+	$salt = "salt";
 	// Hash the password 
-	$hashed_password = password_hash($password, PASSWORD_BCRYPT); 
+	$hashed_password = hash('sha256', $salt . $password);
 	$host = "localhost"; 
 	$dbname = "test"; 
 	$username_db = "root"; 
 	$password_db = ""; 
 	try { 
 		$db = new PDO( 
-		"mysql:host=$host;dbname=$dbname", 
-			$username_db, $password_db); 
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-		
+		"mysql:host=$host;dbname=$dbname",
+			$username_db, $password_db);
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 		// Insert the user into the database 
 		$stmt = $db->prepare( 
 		"INSERT INTO users (name,username,email, password) 
 			VALUES (:name, :username, :email,:password)"); 
 		$stmt->bindParam(":name", $name); 
-		$stmt->bindParam(":username", $username); 
+		$stmt->bindParam(":username", $username);
 		$stmt->bindParam(":email", $email); 
 		$stmt->bindParam(":password", $hashed_password); 
 		$stmt->execute(); 
