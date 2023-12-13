@@ -42,7 +42,7 @@
 			echo "Total price: $total $";
 
 			?>
-			<p>Wallet address: 1GFGFNv7DwEm2xyQF6vthFEQ19JE4rHtEc</p>
+			<p>Wallet address: 1KnSepAPnhzoqzCsvesCuG52kWKrcgXjtj</p>
 			</p>
 			<label for="transID">Transaction ID:</label> 
 			<input type="text"
