@@ -33,10 +33,12 @@
 		<form action="thanks.php" method="post"> 
 			<h4>Pay total to wallet address, then state the transaction ID below</h4> 
 
-			<?php 
-			 
+			<?php
+			session_start();
+
 			include 'config.php';
 			$total = isset($_SESSION['total']) ? $_SESSION['total'] : 0;
+
 			echo "Total price: $total $";
 
 			?>

@@ -10,7 +10,8 @@
 
 <body> 
 	<header> 
-		<h1><?php session_start(); 
+		<h1><?php  
+		session_start();
 		$user = $_SESSION['user']; 
 		echo $user['name']; ?> Shopping Cart</h1> 
 	</header> 
@@ -47,7 +48,7 @@
 					die("Connection failed: " . $conn->connect_error); 
 				} 
 
-				$total = 0; 
+				$total = 0;
 
 				// Loop through items in cart and display in table 
 				foreach ($_SESSION['cart'] as $product_id => $quantity) { 
@@ -60,6 +61,8 @@
 						$price = $row['price']; 
 						$item_total = $quantity * $price; 
 						$total += $item_total; 
+						$_SESSION['total'] = $total;
+
 
 						echo "<tr>"; 
 						echo "<td>$name</td>"; 
