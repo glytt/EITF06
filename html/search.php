@@ -31,7 +31,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 foreach ($results as $result) {
-    echo "<p>" . htmlspecialchars($result['product_name'], ENT_QUOTES, 'UTF-8') . "</p>";
+    echo "<p>" . htmlspecialchars($result['name'], ENT_QUOTES, 'UTF-8') . "</p>";
 }
 
 // foreach ($results as $result) {
