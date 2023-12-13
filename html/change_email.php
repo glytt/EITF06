@@ -25,9 +25,9 @@ try {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-    //     die("CSRF token validation failed.");           
-    // }
+    if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
+        die("CSRF token validation failed.");           
+    }
     $user_id = $_SESSION['user']['username'];  
  
     $new_email = $_POST['new_email'];
