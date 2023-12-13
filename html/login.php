@@ -1,14 +1,8 @@
 <?php 
-
-include 'config/config.php';
+ 
+ include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-// 	if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-// 		echo $_POST["csrf_token"];
-// 		echo "bajs";
-//         die("CSRF token validation failed.");
-		
-//     }
 
 	$username = $_POST["username"]; 
 	$password = $_POST["password"]; 
@@ -32,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$user = $stmt->fetch(PDO::FETCH_ASSOC); 
 
 		if ($user) { 
-			if (password_verify($password, $user["password"])) { 
-				session_start(); 
+			if (password_verify($password, $user["password"]) && $_SESSION["login_counter"] < 5 ) { 
 				$_SESSION["user"] = $user; 
+				$_SESSION["login_counter"] = 0; 
 
 				echo '<script type="text/javascript"> 
 						window.onload = function () { 
@@ -43,10 +37,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						}; 
 					</script> 
 '; 
-			} 
+			} else {
+				echo "<h2>Login Failed</h2>"; 
+				echo "Invalid username or password."; 
+				$_SESSION["login_counter"] += 1;
+			}
 		} else {
+			echo $_SESSION["login_counter"];
 			echo "<h2>Login Failed</h2>"; 
 			echo "Invalid username or password."; 
+			$_SESSION["login_counter"] += 1;
+			 
+			
 			
 		} 
 	} catch (PDOException $e) { 
