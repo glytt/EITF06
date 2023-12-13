@@ -26,7 +26,7 @@ if (isset($_POST["add_to_cart"])) {
 <!DOCTYPE html> 
 <html> 
 	<head> 
-		<title>Totally legal pharmacy</title> 
+		<title>The Cucumber Pharmacy</title> 
 		<link rel="stylesheet"
 				href="css/index.css"> 
 	</head> 
@@ -35,7 +35,7 @@ if (isset($_POST["add_to_cart"])) {
 			<h1>Welcome <?php 
 			$user = $_SESSION["user"]; 
 			echo $user["name"]; 
-			?> to a Totally Legal Pharmacy</h1> 
+			?> to the Cucumber Pharmacy</h1> 
 			<form action="search.php" method="get">
     			<input type="text" name="query" placeholder="Search...">
     			<button type="submit">Search</button>
@@ -57,11 +57,11 @@ if (isset($_POST["add_to_cart"])) {
 				<h2>Products</h2> 
 				<ul> 
 					<li> 
-						<h3>Heroin</h3> 
-						<img src= "images/heroin.jpg" 
+						<h3>Burpless Cucumber</h3> 
+						<img src= "images/burpless-cucumber.jpeg" 
 						alt="Product 1"> 
-						<p>Needle not included</p> 
-						<p><span>500 kr/g</span></p> 
+						<p>Bigger cucumber that tastes good!</p> 
+						<p><span>3 $</span></p> 
 
 						<form method="post" action="shop.php"> 
 						<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'];?>">
@@ -83,12 +83,12 @@ if (isset($_POST["add_to_cart"])) {
 						</form> 
 					</li> 
 					<li> 
-						<h3>LSD</h3> 
-						<img src= "images/lsd.jpg"
+						<h3>Baby Cucumber</h3> 
+						<img src= "images/baby-cucumber.jpg"
 							alt="Product 2"> 
-						<p>100% epicness</p> 
+						<p>Very cute and small cucumber</p> 
 						<p> 
-							<span>400 kr/st</span> 
+							<span>2 $</span> 
 						</p> 
 
 						<form method="post" action="shop.php"> 

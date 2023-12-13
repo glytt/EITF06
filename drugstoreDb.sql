@@ -14,5 +14,5 @@ CREATE TABLE products (
 
 
 INSERT INTO `products` (`id`, `name`, `price`) 
-VALUES  ('1', 'Heroin', '12'), 
-        ('2', 'LSD', '150');
+VALUES  ('1', 'Burpless Cucumber', '3'), 
+        ('2', 'Baby Cucumber', '2');

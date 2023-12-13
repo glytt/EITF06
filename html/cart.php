@@ -50,8 +50,6 @@
 
 				$total = 0;
 
-
-
 				// Loop through items in cart and display in table 
 				foreach ($_SESSION['cart'] as $product_id => $quantity) { 
 					$sql = "SELECT * FROM products WHERE id = $product_id"; 

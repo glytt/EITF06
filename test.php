@@ -1,3 +1,3 @@
 <?php
-echo '<h1>My name is BAJS<h1/>';
+echo '<h1>TEST<h1/>';
 ?>
