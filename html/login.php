@@ -1,9 +1,20 @@
 <?php 
 
+include 'config/config.php';
+
+//session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+// 	if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
+// 		echo $_POST["csrf_token"];
+// 		echo "bajs";
+//         die("CSRF token validation failed.");
+		
+//     }
+
 	$username = $_POST["username"]; 
 	$password = $_POST["password"]; 
-
+	
 	// Connect to the database 
 	$host = "localhost"; 
 	$dbname = "test"; 

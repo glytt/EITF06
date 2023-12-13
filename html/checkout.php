@@ -34,8 +34,8 @@
 			<h4>Pay total to wallet address, then state the transaction ID below</h4> 
 
 			<?php 
-			session_start(); // Make sure to start the session
-
+			//session_start(); // Make sure to start the session
+			include 'config.php';
 			// Retrieve the total from the session
 			$total = isset($_SESSION['total']) ? $_SESSION['total'] : 0;
 			echo "Total price: $total $";

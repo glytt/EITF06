@@ -1,9 +1,12 @@
 <?php 
-session_start(); 
+include 'config.php';
 
 // Start the session 
 // Check if the add to cart button is clicked 
 if (isset($_POST["add_to_cart"])) { 
+	if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
+        die("CSRF token validation failed.");
+    }
 	
 	// Get the product ID from the form 
 	$product_id = $_POST["product_id"]; 
@@ -36,17 +39,24 @@ if (isset($_POST["add_to_cart"])) {
 			$user = $_SESSION["user"]; 
 			echo $user["name"]; 
 			?> to a Totally Legal Pharmacy</h1> 
+			<form action="search.php" method="get">
+    			<input type="text" name="query" placeholder="Search...">
+    			<button type="submit">Search</button>
+			</form>
 		</header> 
 		<nav> 
 			<ul> 
 				<li><a href="shop.php">Home</a></li> 
 				<li><a href="cart.php">Cart</a></li> 
-				<li><a href="logout.php">Logout</a></li> 
+				<li><a href="change_password.php">Change password</a></li> 
+				<li> <a href="change_email.php">Change email</a></li>
+				<li><a href="logout.php">Logout</a>Search</li> 
 
 			</ul> 
 		</nav> 
 		<main> 
 			<section> 
+				
 				<h2>Products</h2> 
 				<ul> 
 					<li> 
@@ -57,6 +67,7 @@ if (isset($_POST["add_to_cart"])) {
 						<p><span>500 kr/g</span></p> 
 
 						<form method="post" action="shop.php"> 
+						<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'];?>">
 							<input type="hidden"
 								name="product_id"
 								value="1"> 
@@ -84,6 +95,7 @@ if (isset($_POST["add_to_cart"])) {
 						</p> 
 
 						<form method="post" action="shop.php"> 
+						<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'];?>">
 							<input type="hidden"
 								name="product_id"
 								value="2"> 
