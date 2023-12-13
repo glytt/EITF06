@@ -5,7 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = $_POST["email"]; 
 	$password = $_POST["password"]; 
 	
-	// Hash the password 
 	$hashed_password = password_hash($password, PASSWORD_BCRYPT); 
 	$host = "localhost"; 
 	$dbname = "test"; 
@@ -19,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$password_db);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 		
-		// Insert the user into the database 
 		$stmt = $db->prepare( 
 		"INSERT INTO users (name,username,email, password) 
 			VALUES (:name, :username, :email,:password)"); 

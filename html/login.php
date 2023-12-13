@@ -2,8 +2,6 @@
 
 include 'config/config.php';
 
-//session_start();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 // 	if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
 // 		echo $_POST["csrf_token"];
@@ -14,8 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$username = $_POST["username"]; 
 	$password = $_POST["password"]; 
-	
-	// Connect to the database 
+ 
 	$host = "localhost"; 
 	$dbname = "test"; 
 	$username_db = "root"; 
@@ -29,14 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		); 
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
-		// Check if the user exists in the database 
 		$stmt = $db->prepare("SELECT * FROM users WHERE username = :username"); 
 		$stmt->bindParam(":username", $username); 
 		$stmt->execute(); 
 		$user = $stmt->fetch(PDO::FETCH_ASSOC); 
 
 		if ($user) { 
-			// Verify the password 
 			if (password_verify($password, $user["password"])) { 
 				session_start(); 
 				$_SESSION["user"] = $user; 

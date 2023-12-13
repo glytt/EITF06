@@ -1,27 +1,24 @@
 <?php 
 include 'config.php';
 
-// Start the session 
-// Check if the add to cart button is clicked 
+ 
 if (isset($_POST["add_to_cart"])) { 
 	if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
         die("CSRF token validation failed.");
     }
-	
-	// Get the product ID from the form 
+ 
 	$product_id = $_POST["product_id"]; 
 	
-	// Get the product quantity from the form 
+	 
 	$product_quantity = $_POST["product_quantity"]; 
 
-	// Initialize the cart session variable 
-	// if it does not exist 
+ 
 	if (!isset($_SESSION["cart"])) { 
 		$_SESSION["cart"] = []; 
 		header("location:cart.php"); 
 	} 
 
-	// Add the product and quantity to the cart 
+	 
 	$_SESSION["cart"][$product_id] = $product_quantity; 
 	header("location:cart.php"); 
 } 
@@ -115,8 +112,6 @@ if (isset($_POST["add_to_cart"])) {
 						</form> 
 					</li> 
 					
-								
-					<!-- Add forms for the other products here --> 
 				</ul> 
 			</section> 
 		</main> 
