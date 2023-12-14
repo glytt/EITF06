@@ -1,68 +1,77 @@
-<!DOCTYPE html> 
-<html> 
+<!DOCTYPE html>
+<html>
 
-<head> 
-	<title>Registration Page</title> 
-	<link rel="stylesheet"
-		type="text/css"
-		href="css/index.css"> 
-</head> 
-<script> 
-	function isNotCommonPassword(password) {
-		var commonPasswords = ["password1234", "qwertyuiopas", "password12345", "111111111111", "1234567654321", "abc123456789", "passwordpassword", "asecurepassword", "thebestpassword", "qwerty123456", "qwertyqwerty", "abcdefg12345", "420blazeit", "dontactuallydodrugs", "tooschoolforcool","tjejerälskarminautismswag", "jagbegårskattebrott"];
-		return !commonPasswords.includes(password);
+<head>
+    <title>Registration Page</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<script>
+
+	var commonPasswords;
+
+	function loadFile() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "rockyou.txt", false);
+        xhr.send();
+
+        if (xhr.status === 200) {
+            commonPasswords = xhr.responseText.split('\n');
+        } else {
+            console.error("Failed to load common passwords.");
+            return false;
+        }
 	}
 
-	function validatePassword() {
-		var passwordInput = document.getElementById("password");
-		var password = passwordInput.value;
+	loadFile()
 
-		if (!isNotCommonPassword(password)) {
-			alert("Please choose a stronger password.");
-			return false;
-		}
-	}
+    function isNotCommonPassword(password) {
+        return !commonPasswords.includes(password);
+    }
+
+    function validatePassword() {
+        var passwordInput = document.getElementById("password");
+        var password = passwordInput.value;
+
+        if (!isNotCommonPassword(password)) {
+            alert("Please choose a stronger password.");
+            return false;
+        }
+
+        return true;
+    }
 
 </script>
 
-<body> 
-	<div class="container"> 
-		<h1>Registration Page</h1> 
-		<form method="post" action="register.php" onsubmit="return validatePassword();"> 
-			<label for="name"> 
-				Name: 
-			</label> 
-			<input type="text"
-				id="name"
-				name="name" required> 
+<body>
+    <div class="container">
+        <h1>Registration Page</h1>
+        <form method="post" action="register.php" onsubmit="return validatePassword();">
+            <label for="name">
+                Name:
+            </label>
+            <input type="text" id="name" name="name" required>
 
-			<label for="username"> 
-				Username: 
-			</label> 
-			<input type="text"
-				id="username"
-				name="username" required> 
+            <label for="username">
+                Username:
+            </label>
+            <input type="text" id="username" name="username" required>
 
-			<label for="email">Email:</label> 
-			<input type="email"
-				id="email"
-				name="email" required> 
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-			<label for="password">Ass2:</label> 
-			<input type="password"
-				id="password"
-				name="password" 
-				pattern=".{12,}"
-				title="Password must be at least 12 characters long" 
-				required> 
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" 
+			pattern="(?=.*[!&%?+#,=])(?=.*[A-Za-z])(?=.*[0-9]).{12,}$" 
+			title="Password must be at least 12 characters long, include at least one letter, digit, and special character (which are !&%?+#,=)" required oninput="validatePassword()">
+			
 
-			<input type="submit"
-				value="Register"> 
-		</form> 
-		<p> Already have an account?</p> 
-		<a href="login.html">Click Here</a> 
-	</div> 
-	<br> 
-</body> 
+            <input type="submit" value="Register">
+        </form>
+        <p> Already have an account?</p>
+        <a href="login.html">Click Here</a>
+    </div>
+    <br>
+</body>
 
 </html>

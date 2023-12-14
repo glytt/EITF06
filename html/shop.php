@@ -47,7 +47,7 @@ if (isset($_POST["add_to_cart"])) {
 				<li><a href="cart.php">Cart</a></li> 
 				<li><a href="change_password.php">Change password</a></li> 
 				<li> <a href="change_email.php">Change email</a></li>
-				<li><a href="logout.php">Logout</a>Search</li> 
+				<li><a href="logout.php">Logout</a></li> 
 
 			</ul> 
 		</nav> 

@@ -1,14 +1,8 @@
 <?php 
-
-include 'config/config.php';
+ 
+ include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-// 	if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-// 		echo $_POST["csrf_token"];
-// 		echo "bajs";
-//         die("CSRF token validation failed.");
-		
-//     }
 
 	$username = $_POST["username"]; 
 	$password = $_POST["password"]; 
@@ -32,9 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$user = $stmt->fetch(PDO::FETCH_ASSOC); 
 
 		if ($user) { 
-			if (password_verify($password, $user["password"])) { 
-				session_start(); 
+			if (password_verify($password, $user["password"]) && $user["loginattempts"] < 5 ) { 
 				$_SESSION["user"] = $user; 
+				$update_stmt = $db->prepare("UPDATE users SET loginattempts = 0 WHERE username = :username");
+                $update_stmt->bindParam(":username", $username);
+                $update_stmt->execute();
 
 				echo '<script type="text/javascript"> 
 						window.onload = function () { 
@@ -43,10 +39,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						}; 
 					</script> 
 '; 
-			} 
+			} else {
+				echo "<h2>Login Failed</h2>"; 
+				echo "Invalid username or password."; 
+				echo $user["loginattempts"];
+				$update_stmt = $db->prepare("UPDATE users SET loginattempts = loginattempts + 1 WHERE username = :username");
+                $update_stmt->bindParam(":username", $username);
+                $update_stmt->execute();
+			}
 		} else {
+			 
 			echo "<h2>Login Failed</h2>"; 
 			echo "Invalid username or password."; 
+			 
+			 
+			
 			
 		} 
 	} catch (PDOException $e) { 
