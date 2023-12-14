@@ -50,9 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		} else {
 			 
 			echo "<h2>Login Failed</h2>"; 
-			echo "Invalid username or password."; 
-			 
-			 
+			echo "Invalid username or password.";  
 			
 			
 		} 
