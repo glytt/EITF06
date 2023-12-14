@@ -26,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		); 
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
-		$stmt = $db->prepare("SELECT * FROM users WHERE username = :username"); 
-		$stmt->bindParam(":username", $username); 
-		$stmt->execute(); 
+		$stmt = $db->prepare("SELECT * FROM users WHERE username = :username"); //username placeholder in the prepared statement
+		$stmt->bindParam(":username", $username); //binds the user input to the placeholder 
+		$stmt->execute(); //carries out the a statement
 		$user = $stmt->fetch(PDO::FETCH_ASSOC); 
 
 		if ($user) { 
